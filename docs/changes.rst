@@ -4,8 +4,16 @@
 Changes in `etgen`
 =======================
 
-Version 0.0.3 (not released)
+Version 0.0.4 (not released)
 ============================
+
+Version 0.0.3 (released 2018-02-16)
+====================================
+
+- Added a test case for :mod:`etgen.sepa.validate`.
+
+- Added dependency to atelier (fix for
+  https://travis-ci.org/lino-framework/etgen/jobs/342304371)
 
 Version 0.0.2 (released 2018-02-16)
 ====================================

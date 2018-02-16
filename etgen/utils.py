@@ -1,14 +1,24 @@
 # Copyright 2011-2018 Rumma & Ko Ltd
 # License: BSD, see LICENSE for more details.
+"""
+Some utility functions.
+"""
 
 from builtins import str
-from builtins import object
+# from builtins import object
 from future.types import newstr
 import six
+import datetime
+from functools import partial
+from etgen import etree
+from django.utils.functional import Promise
+from django.utils.encoding import force_text
+
 
 def join_elems(elems, sep=' '):
     """
     Examples:
+
     >>> join_elems([1, 2, 3])
     [1, ' ', 2, ' ', 3]
     >>> join_elems([1, 2, 3],' / ')
@@ -32,14 +42,10 @@ def join_elems(elems, sep=' '):
     return l
 
 
-import datetime
-from etgen import etree
-from django.utils.functional import Promise
-from django.utils.encoding import force_text
-
 
 def pretty_print(elem):
-    """Return a pretty-printed XML string for the Element.
+    """
+    Return a pretty-printed XML string for the Element.
     """
     return prettify(etree.tostring(elem, 'utf-8'))
     # the following also indented:
@@ -56,7 +62,8 @@ def prettify(s):
 
 
 def compatstr(s):
-    """The `python-future <http://python-future.org/>`__ package
+    """
+    The `python-future <http://python-future.org/>`__ package
     introduces a special helper class `newstr` which simulates, under
     Python 2, the behaviour of Python 3 strings.  But
     `xml.etree.ElementTree
@@ -68,7 +75,6 @@ def compatstr(s):
 
     TODO: Not yet tested under Python 3. At the best it is just
     unefficient.
-
     """
     # assert_pure(s)
     if six.PY2 and isinstance(s, newstr):
@@ -95,10 +101,9 @@ TYPEMAP = {
 
 
 class Namespace(object):
-    """An XML namespace.  Base class for
-    :class:`etgen.html.HtmlNamespace` and the namespaces
-    defined in :mod:`etgen.intervat`.
-
+    """
+    An XML namespace.  Base class for :class:`etgen.html.HtmlNamespace`
+    and the namespaces defined in :mod:`etgen.intervat`.
     """
     prefix = None
     targetNamespace = None
@@ -203,7 +208,6 @@ class Namespace(object):
         return elem
 
     def define_names(self, names):
-        from functools import partial
         if isinstance(names, six.string_types):
             raise Exception("{} must now call itself split().".format(
                 self))

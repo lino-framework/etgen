@@ -4,8 +4,13 @@
 Changes in `etgen`
 =======================
 
-Version 0.0.2 (not released)
+Version 0.0.3 (not released)
 ============================
+
+Version 0.0.2 (released 2018-02-16)
+====================================
+
+Added package data in :file:`etgen/sepa/XSD/*.xsd`.
 
 Version 0.0.1 (released 2018-02-16)
 ====================================

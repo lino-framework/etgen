@@ -166,7 +166,9 @@ class RstTable(rstgen.Table):
      3                        4
     ======================== ================
     <BLANKLINE>
+
     <NEXTCELL>
+
     ======================== ================
      A **formatted** header   A plain header
     ------------------------ ----------------

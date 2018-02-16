@@ -5,11 +5,11 @@
 # from `setup.py`, `etgen/__init__.py` and possibly some external
 # tools, too.
 
-install_requires = ['six', 'django', 'future']
+install_requires = ['six', 'django', 'future', 'lxml']
 
 SETUP_INFO = dict(
     name='etgen',
-    version='0.0.1',
+    version='0.0.2',
     install_requires=install_requires,
     description="Use ElementTree to generate html, rst and other markup",
     license='Free BSD',
@@ -19,7 +19,8 @@ SETUP_INFO = dict(
     url="http://etgen.lino-framework.org",
     long_description="""\
 
-Utilities for generating html, xml and rst output from an `ElementTree
+Utilities for generating html, xml and rst content from an
+`ElementTree
 <https://docs.python.org/2/library/xml.etree.elementtree.html>`_.
 
 Inspired by Frederik Lundh's `ElementTree Builder
@@ -47,6 +48,16 @@ etgen.odf
 etgen.sepa
 """.splitlines() if n])
 
-SETUP_INFO.update(package_data=dict())
+SETUP_INFO.update(package_data=dict(), include_package_data=True)
 
 
+def add_package_data(package, *patterns):
+    l = SETUP_INFO['package_data'].setdefault(package, [])
+    l.extend(patterns)
+    return l
+
+
+add_package_data('etgen', 'etgen/sepa/XSD/*.xsd')
+
+# print(20180216, SETUP_INFO['package_data'])
+# raw_input()

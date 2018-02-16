@@ -5,7 +5,8 @@ The ``etgen`` package
 
 
 
-Utilities for generating html, xml and rst output from an `ElementTree
+Utilities for generating html, xml and rst content from an
+`ElementTree
 <https://docs.python.org/2/library/xml.etree.elementtree.html>`_.
 
 Inspired by Frederik Lundh's `ElementTree Builder

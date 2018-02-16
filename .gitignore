@@ -1,0 +1,26 @@
+# use glob syntax.
+syntax: glob
+
+*.elc
+*.pyc
+*~
+*.dpyc
+*.log
+*.class
+*.zip
+*.dtl.py
+*.js.py
+*.bat
+dist
+tmp
+*/default.db
+docs/dl/*
+docs/api/atelier.*
+.build
+htmlcov
+*.egg-info
+.DS_Store
+.idea
+.coverage
+.coverage.*
+htmlcov

@@ -5,7 +5,7 @@
 # from `setup.py`, `etgen/__init__.py` and possibly some external
 # tools, too.
 
-install_requires = ['six', 'django', 'future', 'lxml']
+install_requires = ['six', 'django', 'future', 'lxml', 'atelier']
 
 SETUP_INFO = dict(
     name='etgen',

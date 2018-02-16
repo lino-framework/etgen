@@ -1,4 +1,4 @@
-# Copyright 2011-2018 by Luc Saffre.
+# Copyright 2011-2018 Rumma & Ko Ltd
 # License: BSD, see LICENSE for more details.
 
 from builtins import str

@@ -5,7 +5,7 @@
 # The ElementTree toolkit is
 # Copyright (c) 1999-2004 by Fredrik Lundh
 # Modifications in this file are
-# Copyright (c) 2012-2016 Luc Saffre
+# Copyright (c) 2012-2018 Rumma & Ko Ltd
 # --------------------------------------------------------------------
 
 """Defines an ElementTree Builder for generating HTML documents.

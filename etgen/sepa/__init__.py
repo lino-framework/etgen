@@ -1,13 +1,9 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2016 Luc Saffre
+# Copyright 2013-2018 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
-# Test this directly using:
-#
-#   $ python setup.py test -s tests.UtilsTests.test_xmlgen_sepa
 
-u"""
-A set of generator tags for building SEPA documents.
+u"""A set of generator tags for building SEPA documents.
 
 Requires Python 2.7 because it needs the `default_namespace` for
 `ElementTree.write`.

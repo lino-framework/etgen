@@ -1,4 +1,4 @@
-# Copyright 2013-2018 by Luc Saffre.
+# Copyright 2013-2018 Rumma & Ko Ltd
 # License: BSD, see LICENSE for more details.
 
 # This module has no docstring because it is to be execfile'd
@@ -19,14 +19,11 @@ SETUP_INFO = dict(
     url="http://etgen.lino-framework.org",
     long_description="""\
 
-`etgen` 
-generates html, xml and rst output from an 
-`ElementTree
-<https://docs.python.org/2/library/xml.etree.elementtree.html>`_ .
+Utilities for generating html, xml and rst output from an `ElementTree
+<https://docs.python.org/2/library/xml.etree.elementtree.html>`_.
 
 Inspired by Frederik Lundh's `ElementTree Builder
-<http://effbot.org/zone/element-builder.htm>`_
-
+<http://effbot.org/zone/element-builder.htm>`_.
 
 The central project homepage is http://etgen.lino-framework.org
 

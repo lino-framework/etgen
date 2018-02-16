@@ -1,7 +1,7 @@
 .. _etgen:
 
 =======
-ETGen
+etgen
 =======
 
 .. py2rst::
@@ -29,5 +29,5 @@ Sitemap
    usage
    api/index
    changes
-
+   thanks
 

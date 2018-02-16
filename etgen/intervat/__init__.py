@@ -4,8 +4,14 @@
 
 u"""
 Tools for generating  
-`Belgian Intervat declarations
-<http://minfin.fgov.be/portail2/fr/e-services/intervat/>`_
+Belgian Intervat declarations.
+
+- https://finances.belgium.be/fr/E-services/Intervat/documentation-technique
+
+- https://eservices.minfin.fgov.be/intervat/static/help/FR/faq_xml.htm
+
+
+.. rubric:: Usage example
 
 >>> vat_number = "0123456789"
 >>> def me():
@@ -87,18 +93,27 @@ def xsdpath(*parts):
 class IntervatInputCommon(Namespace):
     xsd_filename = xsdpath('IntervatInputCommon_v0_7.xsd')
 iic = IntervatInputCommon('iic')
+"""
+The IntervatInputCommon namespace.
+"""
 
 
 class ClientListingConsignment(Namespace):
     xsd_filename = xsdpath('NewLK-in_v0_7.xsd')
     used_namespaces = [iic]
 clc = ClientListingConsignment('clc')
+"""
+The ClientListingConsignment namespace.
+"""
 
 
 class IntraConsignment(Namespace):
     xsd_filename = xsdpath('NewICO-in_v0_7.xsd')
     used_namespaces = [iic]
 ico = IntraConsignment('ico')
+"""
+The IntraConsignment namespace.
+"""
 
 
 def _test():

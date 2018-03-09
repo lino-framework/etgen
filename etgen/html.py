@@ -16,62 +16,64 @@
 
 Usage:
 
->>> from etgen.html import E
+>>> # from etgen.html import E
+>>> import lxml.usedoctest
 >>> html = E.html(
 ...            E.head( E.title("Hello World") ),
 ...            E.body(
 ...              E.h1("Hello World !"),
-...              class_="main"
+...              CLASS("main")
 ...            )
 ...        )
 
->>> print (E.tostring_pretty(html))
+>>> print (tostring_pretty(html))
 <html>
-<head>
-<title>Hello World</title>
-</head>
-<body class="main">
-<h1>Hello World !</h1>
-</body>
+  <head>
+    <title>Hello World</title>
+  </head>
+  <body class="main">
+    <h1>Hello World !</h1>
+  </body>
 </html>
 
 
 >>> kw = dict(title=u'Ein süßes Beispiel')
 >>> kw.update(href="foo/bar.html")
->>> btn = E.button(type='button', class_='x-btn-text x-tbar-upload')
+>>> btn = E.button(type='button', **CLASS('x-btn-text x-tbar-upload'))
 >>> html = E.a(btn, **kw)
->>> print (E.tostring_pretty(html))
-<a href="foo/bar.html" title="Ein s&#252;&#223;es Beispiel">
-<button class="x-btn-text x-tbar-upload" type="button" />
+>>> print (tostring_pretty(html))
+<a href="foo/bar.html" title="Ein süßes Beispiel">
+  <button class="x-btn-text x-tbar-upload" type="button"/>
 </a>
 
 You can also do the opposite, i.e. parse HTML:
-
->>> html = E.raw('''<a href="foo/bar.html"
+>>> from lxml import etree
+>>> E_raw = etree.fromstring
+>>> html = E_raw('''<a href="foo/bar.html"
 ... title="Ein s&#252;&#223;es Beispiel">
-... <button class="x-btn-text x-tbar-upload" type="button" />
+... <button class="x-btn-text x-tbar-upload" type="button"/>
 ... </a>''')
->>> print(E.tostring_pretty(html))
-<a href="foo/bar.html" title="Ein s&#252;&#223;es Beispiel">
-<button class="x-btn-text x-tbar-upload" type="button" />
+>>> print(tostring_pretty(html))
+<a href="foo/bar.html" title="Ein süßes Beispiel">
+  <button class="x-btn-text x-tbar-upload" type="button"/>
 </a>
 
 
->>> print(E.tostring(E.raw(
+>>> print(tostring(E_raw(
 ...     '<ul type="disc"><li>First</li><li>Second</li></ul>')))
 <ul type="disc"><li>First</li><li>Second</li></ul>
 
 >>> html = E.div(E.p("First"), E.p("Second"))
->>> print(E.tostring_pretty(html))
+>>> print(tostring_pretty(html))
 <div>
-<p>First</p>
-<p>Second</p>
+  <p>First</p>
+  <p>Second</p>
 </div>
 >>> html.attrib['class'] = 'htmlText'
->>> print(E.tostring_pretty(html))
+>>> print(tostring_pretty(html))
 <div class="htmlText">
-<p>First</p>
-<p>Second</p>
+  <p>First</p>
+  <p>Second</p>
 </div>
 
 
@@ -83,10 +85,11 @@ from builtins import object
 
 import types
 from xml.etree import ElementTree as ET
-from lxml.etree import HTML
-
-from etgen.utils import join_elems
-from etgen.utils import Namespace
+# from lxml.etree import HTML
+from lxml import etree
+from lxml.etree import iselement
+from etgen.utils import join_elems, forcetext
+# from etgen.utils import Namespace
 from etgen.html2rst import html2rst
 # from htmlentitydefs import name2codepoint
 
@@ -115,171 +118,182 @@ from etgen.html2rst import html2rst
 #     pass
 
 
-class HtmlNamespace(Namespace):
-    """The HTML namespace.
-    This is instantiated as ``E``.
-    """
+def CLASS(*args): # class is a reserved word in Python
+    return {"class": ' '.join(args)}
 
-    def tostring(self, v, *args, **kw):
-        # if isinstance(v, types.GeneratorType):
-        if isinstance(v, (types.GeneratorType, list, tuple)):
-            return "".join([self.tostring(x, *args, **kw) for x in v])
-        if self.iselement(v):
-            # kw.setdefault('method', 'html')
-            return super(HtmlNamespace, self).tostring(v, *args, **kw)
-        return str(v)
+# class HtmlNamespace(Namespace):
+#     """The HTML namespace.
+#     This is instantiated as ``E``.
+#     """
 
-    def to_rst(self, v, stripped=True):
-        if isinstance(v, types.GeneratorType):
-            return "".join([self.to_rst(x, stripped) for x in v])
-        if self.iselement(v):
-            return html2rst(v, stripped)
-        return str(v)
+def tostring(v, *args, **kw):
+    # if isinstance(v, types.GeneratorType):
+    if isinstance(v, (types.GeneratorType, list, tuple)):
+        return "".join([tostring(x, *args, **kw) for x in v])
+    if etree.iselement(v):
+        # kw.setdefault('method', 'html')
+        kw.setdefault('encoding', 'unicode')
+        return etree.tostring(v, *args, **kw)
+    return str(v)
 
-    # def raw(self, raw_html):
-    #     return RAW_HTML_STRING(raw_html)
-
-    def raw(self, raw_html):
-        """
-        Parses the given string into an HTML Element.
-
-        It the string contains a a single top-level element, then this
-        element is returned. Otherwise return the wrapping ``body``
-        element.
-        """
-        # print 20151008, raw_html
-
-        # the lxml parser wraps `<html><body>...</body></html>` around
-        # the snippet, but we don't want it.
-        try:
-            root = HTML(raw_html)[0]
-            # root = E.html(raw_html)[0]
-        except Exception as e:
-            return E.p("Invalid HTML ({}) in {}".format(e, raw_html))
-        if len(root) == 1:
-            return root[0]
-        return root
-        # try:
-        #     return self.fromstring(raw_html, parser=CreateParser())
-        # except ET.ParseError as e:
-        #     raise Exception("ParseError {0} in {1}".format(e, raw_html))
+def tostring_pretty(*args, **kw):
+    kw.setdefault('pretty_print', True)
+    return tostring(*args, **kw).strip()  # remove blank line at end
+    # return prettify(s)
 
 
-E = HtmlNamespace(None, set("""
-a
-abbr
-acronym
-address
-alt
-applet
-area
-b
-base
-basefont
-bdo
-big
-blockquote
-body
-br
-button
-caption
-center
-cite     
-code     
-col      
-colgroup 
-dd       
-del      
-dfn      
-dir      
-div      
-dl       
-dt       
-em       
-fieldset 
-font     
-form     
-frame    
-frameset 
-h1     
-h2     
-h3     
-h4     
-h5
-h6
-head
-height
-hr     
-html   
-i      
-iframe 
-img    
-input  
-ins    
-isindex 
-kbd 
-label 
-legend 
-li 
-link 
-map 
-menu 
-meta 
-name
-noframes 
-noscript 
-object 
-ol 
-optgroup 
-option 
-p
-param 
-pre 
-q 
-s 
-samp
-script
-select
-small
-span
-strike
-strong
-style
-sub
-sup
-table
-tbody
-td
-textarea
-tfoot
-th
-thead
-title
-tr
-tt
-u
-ul
-var
+def to_rst(v, stripped=True):
+    if isinstance(v, types.GeneratorType):
+        return "".join([to_rst(x, stripped) for x in v])
+    if iselement(v):
+        return html2rst(v, stripped)
+    return str(v)
 
-class
-id
-bgcolor
-cellspacing
-width
-align
-valign
-href
-type
-rel
-target
-value
-onclick
-src
-rows
-data-toggle
-tabindex
-placeholder
-""".split()))
+#     # def raw(self, raw_html):
+#     #     return RAW_HTML_STRING(raw_html)
+
+#     def raw(self, raw_html):
+#         """
+#         Parses the given string into an HTML Element.
+
+#         It the string contains a a single top-level element, then this
+#         element is returned. Otherwise return the wrapping ``body``
+#         element.
+#         """
+#         # print 20151008, raw_html
+
+#         # the lxml parser wraps `<html><body>...</body></html>` around
+#         # the snippet, but we don't want it.
+#         try:
+#             root = HTML(raw_html)[0]
+#             # root = E.html(raw_html)[0]
+#         except Exception as e:
+#             return E.p("Invalid HTML ({}) in {}".format(e, raw_html))
+#         if len(root) == 1:
+#             return root[0]
+#         return root
+#         # try:
+#         #     return self.fromstring(raw_html, parser=CreateParser())
+#         # except ET.ParseError as e:
+#         #     raise Exception("ParseError {0} in {1}".format(e, raw_html))
+
+from lxml.builder import E
+
+# E = HtmlNamespace(None, set("""
+# a
+# abbr
+# acronym
+# address
+# alt
+# applet
+# area
+# b
+# base
+# basefont
+# bdo
+# big
+# blockquote
+# body
+# br
+# button
+# caption
+# center
+# cite     
+# code     
+# col      
+# colgroup 
+# dd       
+# del      
+# dfn      
+# dir      
+# div      
+# dl       
+# dt       
+# em       
+# fieldset 
+# font     
+# form     
+# frame    
+# frameset 
+# h1     
+# h2     
+# h3     
+# h4     
+# h5
+# h6
+# head
+# height
+# hr     
+# html   
+# i      
+# iframe 
+# img    
+# input  
+# ins    
+# isindex 
+# kbd 
+# label 
+# legend 
+# li 
+# link 
+# map 
+# menu 
+# meta 
+# name
+# noframes 
+# noscript 
+# object 
+# ol 
+# optgroup 
+# option 
+# p
+# param 
+# pre 
+# q 
+# s 
+# samp
+# script
+# select
+# small
+# span
+# strike
+# strong
+# style
+# sub
+# sup
+# table
+# tbody
+# td
+# textarea
+# tfoot
+# th
+# thead
+# title
+# tr
+# tt
+# u
+# ul
+# var
+
+# class
+# id
+# bgcolor
+# cellspacing
+# width
+# align
+# valign
+# href
+# type
+# rel
+# target
+# value
+# onclick
+# src
+# rows
+# data-toggle
+# tabindex
+# placeholder
+# """.split()))
 
 
 def table_header_row(*headers, **kw):
@@ -377,22 +391,22 @@ def lines2p(lines, min_height=0, **attrs):
 
     Examples:
 
-    >>> print(E.tostring(lines2p(['first', 'second'])))
-    <p>first<br />second</p>
+    >>> print(tostring(lines2p(['first', 'second'])))
+    <p>first<br/>second</p>
 
-    >>> print(E.tostring(lines2p(['first', 'second'], min_height=5)))
-    <p>first<br />second<br /><br /><br /></p>
+    >>> print(tostring(lines2p(['first', 'second'], min_height=5)))
+    <p>first<br/>second<br/><br/><br/></p>
 
     If `min_height` is specified, and `lines` contains more items,
     then we don't truncate:
 
-    >>> print(E.tostring(lines2p(['a', 'b', 'c', 'd', 'e'], min_height=4)))
-    <p>a<br />b<br />c<br />d<br />e</p>
+    >>> print(tostring(lines2p(['a', 'b', 'c', 'd', 'e'], min_height=4)))
+    <p>a<br/>b<br/>c<br/>d<br/>e</p>
 
     This also works:
 
-    >>> print(E.tostring(lines2p([], min_height=5)))
-    <p><br /><br /><br /><br /></p>
+    >>> print(tostring(lines2p([], min_height=5)))
+    <p><br/><br/><br/><br/></p>
 
     """
     while len(lines) < min_height:

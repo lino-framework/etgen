@@ -41,7 +41,16 @@ def join_elems(elems, sep=' '):
         l.append(e)
     return l
 
-
+def forcetext(iter):
+    """
+    Resolve any lazy translatable strings. Utility function for lxml
+    element trees.
+    """
+    for i in iter:
+        if isinstance(i, Promise):
+            yield str(i)
+        else:
+            yield i
 
 def pretty_print(elem):
     """

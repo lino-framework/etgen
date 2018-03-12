@@ -10,6 +10,7 @@ etgen.utils
    .. autosummary::
    
       compatstr
+      forcetext
       join_elems
       prettify
       pretty_print

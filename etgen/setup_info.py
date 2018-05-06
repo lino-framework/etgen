@@ -57,7 +57,7 @@ def add_package_data(package, *patterns):
     return l
 
 
-add_package_data('etgen', 'etgen/sepa/XSD/*.xsd')
+add_package_data('etgen.sepa', 'XSD/*.xsd')
 
 # print(20180216, SETUP_INFO['package_data'])
 # raw_input()

@@ -5,11 +5,11 @@
 # from `setup.py`, `etgen/__init__.py` and possibly some external
 # tools, too.
 
-install_requires = ['six', 'django', 'future', 'lxml', 'atelier']
+install_requires = ['six', 'future', 'lxml', 'atelier', 'django']
 
 SETUP_INFO = dict(
     name='etgen',
-    version='0.0.3',
+    version='0.0.4',
     install_requires=install_requires,
     description="Use ElementTree to generate html, rst and other markup",
     license='Free BSD',
@@ -57,7 +57,7 @@ def add_package_data(package, *patterns):
     return l
 
 
-add_package_data('etgen', 'etgen/sepa/XSD/*.xsd')
+add_package_data('etgen.sepa', 'XSD/*.xsd')
 
 # print(20180216, SETUP_INFO['package_data'])
 # raw_input()

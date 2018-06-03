@@ -47,6 +47,7 @@ Usage:
 </a>
 
 You can also do the opposite, i.e. parse HTML:
+
 >>> from lxml import etree
 >>> E_raw = etree.fromstring
 >>> html = E_raw('''<a href="foo/bar.html"
@@ -385,9 +386,10 @@ class Document(object):
 
 
 def lines2p(lines, min_height=0, **attrs):
-    """Convert the given list of text lines `lines` into a paragraph
-(``<p>``) with one ``<br>`` between each line. If optional
-`min_height` is given, add empty lines if necessary.
+    """
+    Convert the given list of text lines `lines` into a paragraph
+    (``<p>``) with one ``<br>`` between each line. If optional
+    `min_height` is given, add empty lines if necessary.
 
     Examples:
 
@@ -407,7 +409,6 @@ def lines2p(lines, min_height=0, **attrs):
 
     >>> print(tostring(lines2p([], min_height=5)))
     <p><br/><br/><br/><br/></p>
-
     """
     while len(lines) < min_height:
         lines.append('')

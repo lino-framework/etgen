@@ -9,9 +9,13 @@ etgen.html
 
    .. autosummary::
    
+      CLASS
       lines2p
       table_body_row
       table_header_row
+      to_rst
+      tostring
+      tostring_pretty
    
    
 
@@ -22,7 +26,6 @@ etgen.html
    .. autosummary::
    
       Document
-      HtmlNamespace
       Table
    
    

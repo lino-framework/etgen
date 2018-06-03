@@ -71,4 +71,5 @@ __version__ = SETUP_INFO['version']
 
 intersphinx_urls = dict(docs="http://etgen.lino-framework.org")
 srcref_url = 'https://github.com/lino-framework/etgen/blob/master/%s'
+doc_trees = ['docs']
 

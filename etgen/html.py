@@ -103,12 +103,17 @@ instantiating the element is not enough:
 >>> print(tostring(E.div(" ")))
 <div/>
 
-Another approach to avoid self-closing tags is to use the c14n method when
-writing the element.  But this approach doesn't accept encoding and produces a
-binary string:
+The real solution would be to use the "html" method when writing the tree to
+html:
 
->>> print(etree.tostring(E.div(), method="c14n"))
-b'<div></div>'
+>>> print(tostring(E.div(), method="html"))
+<div></div>
+
+TODO: This approach has been active as default value (see disabled line in code
+of :func:`tostring`) and I don't remember why we disabled it.  I suggest to
+re-enable it and test thoroughly whether this causes regressions (and if yes,
+why it causes them).
+
 
 
 

@@ -1,11 +1,11 @@
 # -*- coding: UTF-8 -*-
-# doctest etgen/html
+# doctest etgen/html.py
 # Adapted copy from lxml\src\lxml\html\builder.py
 # --------------------------------------------------------------------
 # The ElementTree toolkit is
 # Copyright (c) 1999-2004 by Fredrik Lundh
 # Modifications in this file are
-# Copyright (c) 2012-2018 Rumma & Ko Ltd
+# Copyright (c) 2012-2019 Rumma & Ko Ltd
 # --------------------------------------------------------------------
 
 """Defines an ElementTree Builder for generating HTML documents.
@@ -76,6 +76,40 @@ You can also do the opposite, i.e. parse HTML:
   <p>First</p>
   <p>Second</p>
 </div>
+
+Avoid self-closing tags
+=======================
+
+lxml generates self-closing tags for elements without children:
+
+>>> print(tostring(E.div()))
+<div/>
+
+Some environments refuse empty ``div>`` elements and interpret a ``<div/>`` as
+``<div>`` (don't ask me why).  You can avoid the self-closing tag by setting
+the ``text`` attribute to an empty string:
+
+>>> html = E.div()
+>>> html.text = ""
+>>> print(tostring(html))
+<div></div>
+
+Note that you must set ``text`` explicitly. Simply specifying it when
+instantiating the element is not enough:
+
+>>> print(tostring(E.div("")))
+<div/>
+
+>>> print(tostring(E.div(" ")))
+<div/>
+
+Another approach to avoid self-closing tags is to use the c14n method when
+writing the element.  But this approach doesn't accept encoding and produces a
+binary string:
+
+>>> print(etree.tostring(E.div(), method="c14n"))
+b'<div></div>'
+
 
 
 """

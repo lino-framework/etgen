@@ -13,9 +13,8 @@ syntax: glob
 *.bat
 dist
 tmp
-*/default.db
 docs/dl/*
-docs/api/atelier.*
+docs/api/etgen.*
 .build
 htmlcov
 *.egg-info

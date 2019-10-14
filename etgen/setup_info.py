@@ -1,4 +1,4 @@
-# Copyright 2013-2018 Rumma & Ko Ltd
+# Copyright 2013-2019 Rumma & Ko Ltd
 # License: BSD, see LICENSE for more details.
 
 # This module has no docstring because it is to be execfile'd
@@ -9,7 +9,7 @@ install_requires = ['six', 'future', 'lxml', 'atelier', 'django']
 
 SETUP_INFO = dict(
     name='etgen',
-    version='0.0.5',
+    version='1.0.0',
     install_requires=install_requires,
     description="Use ElementTree to generate html, rst and other markup",
     license='BSD-2-Clause',

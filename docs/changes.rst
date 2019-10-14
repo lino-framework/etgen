@@ -1,11 +1,16 @@
-.. _etgen.changes: 
+.. _etgen.changes:
 
 =======================
 Changes in `etgen`
 =======================
 
-Version 0.0.5 (not released)
-============================
+2019-10-14
+==========
+
+html2rst now digests ``html`` and ``body`` elemtns and provides clearer
+error messages for unsupported elements
+
+Released version 1.0.0
 
 Version 0.0.4 (released 2018-03-11)
 ====================================
@@ -25,7 +30,7 @@ Old code::
      E.tostring()
 
 New code::
-     
+
      from etgen.html import E, tostring
      ...
      tostring()
@@ -45,18 +50,18 @@ After::
 Failures saying `TypeError: bad argument type: __proxy__(u' by ')` are
 because lxml elements don't like Django translatable strings.  Old
 code::
-  
+
     return E.div(E.h2(self.actor.label), e)
-            
+
 New code::
-  
+
     return E.div(E.h2(str(self.actor.label)), e)
 
 Another failure was in code which updates existing elements
 :message:`TypeError: update() takes no keyword arguments`. Old code::
-  
+
     e.attrib.update(align='right')
-        
+
 New code::
 
     e.set('align', 'right')
@@ -85,4 +90,3 @@ Lino as the packages :mod:`lino.utils.xmlgen` and
 :mod:`lino.utils.html2rst`.  We moved them out of Lino into an
 independent package :mod:`etgen` because they might be of use also for
 projects which don't use Lino.
-

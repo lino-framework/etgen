@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2018 Rumma & Ko Ltd
+# Copyright 2013-2019 Rumma & Ko Ltd
 # License: BSD (see file COPYING for details)
 
 """
@@ -71,8 +71,10 @@ from atelier import rstgen
 from etgen import etree
 
 NEWLINE_TAGS = set(['p', 'thead', 'tr', 'li'])
-IGNORED_TAGS = set(['tbody', 'table', 'div', 'span', 'br', 'ul', 'ol'])
+IGNORED_TAGS = set(['tbody', 'table', 'div', 'span', 'br', 'ul', 'ol', 'html', 'body'])
 
+class UnsupportedHtmlTag(Exception):
+    pass
 
 def html2rst(e, stripped=False):
     """
@@ -114,7 +116,7 @@ def html2rst(e, stripped=False):
             rst += '\n'
         else:
             rst = '\n\n' + rst + '\n\n'
-    elif e.tag == 'b':
+    elif e.tag == 'b' or e.tag == 'strong':
         if rst == '**':
             rst = ''
         else:
@@ -133,11 +135,9 @@ def html2rst(e, stripped=False):
         rst += ' '
     else:
         if e.tag not in IGNORED_TAGS:
-            raise Exception("20150723 %s" % e.tag)
-
+            raise UnsupportedHtmlTag(e.tag)
     if e.tail:
         rst += e.tail
-
     return rst
 
 
@@ -181,5 +181,3 @@ class RstTable(rstgen.Table):
         if etree.iselement(v):
             return html2rst(v, True).strip()
         return super(RstTable, self).format_value(v).strip()
-
-

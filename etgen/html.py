@@ -130,7 +130,7 @@ from lxml import etree
 from lxml.etree import iselement
 from etgen.utils import join_elems, forcetext
 # from etgen.utils import Namespace
-from etgen.html2rst import html2rst
+from etgen.html2rst import html2rst, UnsupportedHtmlTag
 # from htmlentitydefs import name2codepoint
 
 # ENTITIES = {}
@@ -186,7 +186,10 @@ def to_rst(v, stripped=True):
     if isinstance(v, types.GeneratorType):
         return "".join([to_rst(x, stripped) for x in v])
     if iselement(v):
-        return html2rst(v, stripped)
+        try:
+            return html2rst(v, stripped)
+        except UnsupportedHtmlTag as e:
+            raise Exception("{} while converting {} to reSTructuredText".format(e, tostring(v)))
     return str(v)
 
 #     # def raw(self, raw_html):
@@ -238,59 +241,59 @@ from lxml.builder import E
 # button
 # caption
 # center
-# cite     
-# code     
-# col      
-# colgroup 
-# dd       
-# del      
-# dfn      
-# dir      
-# div      
-# dl       
-# dt       
-# em       
-# fieldset 
-# font     
-# form     
-# frame    
-# frameset 
-# h1     
-# h2     
-# h3     
-# h4     
+# cite
+# code
+# col
+# colgroup
+# dd
+# del
+# dfn
+# dir
+# div
+# dl
+# dt
+# em
+# fieldset
+# font
+# form
+# frame
+# frameset
+# h1
+# h2
+# h3
+# h4
 # h5
 # h6
 # head
 # height
-# hr     
-# html   
-# i      
-# iframe 
-# img    
-# input  
-# ins    
-# isindex 
-# kbd 
-# label 
-# legend 
-# li 
-# link 
-# map 
-# menu 
-# meta 
+# hr
+# html
+# i
+# iframe
+# img
+# input
+# ins
+# isindex
+# kbd
+# label
+# legend
+# li
+# link
+# map
+# menu
+# meta
 # name
-# noframes 
-# noscript 
-# object 
-# ol 
-# optgroup 
-# option 
+# noframes
+# noscript
+# object
+# ol
+# optgroup
+# option
 # p
-# param 
-# pre 
-# q 
-# s 
+# param
+# pre
+# q
+# s
 # samp
 # script
 # select

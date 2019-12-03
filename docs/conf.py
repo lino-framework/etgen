@@ -76,7 +76,7 @@ exclude_trees = [
 #show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+# pygments_style = 'sphinx'
 
 
 # Options for HTML output
@@ -89,7 +89,7 @@ pygments_style = 'sphinx'
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = etgen.SETUP_INFO['name'] # u"DjangoSite"
+html_title = etgen.SETUP_INFO['name']
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
@@ -192,7 +192,7 @@ htmlhelp_basename = 'etgen'
 #~ show_source = True
 
 #~ srcref_base_uri="http://code.google.com/lino"
-#~ srcref_base_uri="http://code.google.com/p/lino/source/browse/#hg" 
+#~ srcref_base_uri="http://code.google.com/p/lino/source/browse/#hg"
 
 
 extlinks = {
@@ -207,11 +207,11 @@ autosummary_generate = True
 # my_font_family = "Swiss, Helvetica, Nimbus"
 # my_font_family = "Verdana, 'DejaVu Sans'"
 # http://sphinx.pocoo.org/theming.html
-my_font_family = "Swiss, Helvetica, 'Liberation Sans'"
-html_theme_options = {
-    "font_family": my_font_family,
-    "head_font_family": my_font_family,
-}
+# my_font_family = "Swiss, Helvetica, 'Liberation Sans'"
+# html_theme_options = {
+#     "font_family": my_font_family,
+#     "head_font_family": my_font_family,
+# }
     # font_family: "'goudy old style', 'minion pro', 'bell mt', Georgia, 'Hiragino Mincho Pro', serif")
 
 # html_theme = "default"

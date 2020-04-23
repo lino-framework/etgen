@@ -119,8 +119,6 @@ why it causes them).
 
 """
 
-from __future__ import unicode_literals
-from builtins import str
 from builtins import object
 
 import types
@@ -170,7 +168,7 @@ def tostring(v, *args, **kw):
     # if isinstance(v, types.GeneratorType):
     if isinstance(v, (types.GeneratorType, list, tuple)):
         return "".join([tostring(x, *args, **kw) for x in v])
-    if etree.iselement(v):
+    if iselement(v):
         # kw.setdefault('method', 'html')
         kw.setdefault('encoding', 'unicode')
         return etree.tostring(v, *args, **kw)

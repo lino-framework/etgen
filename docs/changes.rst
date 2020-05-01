@@ -4,6 +4,18 @@
 Changes in `etgen`
 =======================
 
+2020-05-01
+==========
+
+Fixed two warnings "ResourceWarning: unclosed file <_io.TextIOWrapper
+name='.../tests/finan.PaymentOrder-63.xml' mode='r' encoding='UTF-8'>"
+caused by :mod:`etgen.sepa.validate`.
+
+New rule for :func:`etgen.html.to_rst` : when the value is a string, we now
+assume that it is raw HTML, which means that we parse it and then process is
+like normal element tree elements.
+
+
 2019-10-14
 ==========
 

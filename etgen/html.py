@@ -181,8 +181,18 @@ def tostring_pretty(*args, **kw):
 
 
 def to_rst(v, stripped=True):
+    """Render the given value as an rst formatted string."""
     if isinstance(v, types.GeneratorType):
         return "".join([to_rst(x, stripped) for x in v])
+    # 20200501 new rule : if v is a str, then it is supposed to be raw html
+    if isinstance(v, str):
+        if not v:
+            return v
+        v2 = etree.fromstring(v)
+        if not iselement(v2):
+            raise Exception(
+                "fromstring({!r}) returned {} (expected element)".format(v, v2))
+        v = v2
     if iselement(v):
         try:
             return html2rst(v, stripped)

@@ -9,7 +9,7 @@ install_requires = ['six', 'future', 'lxml', 'atelier', 'django']
 
 SETUP_INFO = dict(
     name='etgen',
-    version='1.0.0',
+    version='1.1.0',
     install_requires=install_requires,
     description="Use ElementTree to generate html, rst and other markup",
     license='BSD-2-Clause',

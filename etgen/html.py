@@ -435,7 +435,7 @@ class Document(object):
         )
 
 
-def lines2p(lines, min_height=0, **attrs):
+def lines2p(lines, min_height=0, sep=E.br, **attrs):
     """
     Convert the given list of text lines `lines` into a paragraph
     (``<p>``) with one ``<br>`` between each line. If optional
@@ -462,7 +462,7 @@ def lines2p(lines, min_height=0, **attrs):
     """
     while len(lines) < min_height:
         lines.append('')
-    lines = join_elems(lines, E.br)
+    lines = join_elems(lines, sep)
     return E.p(*lines, **attrs)
 
 

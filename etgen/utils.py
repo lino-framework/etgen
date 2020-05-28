@@ -1,13 +1,11 @@
-# Copyright 2011-2018 Rumma & Ko Ltd
+# Copyright 2011-2020 Rumma & Ko Ltd
 # License: BSD, see LICENSE for more details.
 """
 Some utility functions.
 """
 
-from builtins import str
 # from builtins import object
-from future.types import newstr
-import six
+# from future.types import newstr
 import datetime
 from functools import partial
 from etgen import etree
@@ -86,8 +84,8 @@ def compatstr(s):
     unefficient.
     """
     # assert_pure(s)
-    if six.PY2 and isinstance(s, newstr):
-        return six.text_type(s)
+    # if six.PY2 and isinstance(s, newstr):
+    #     return six.text_type(s)
     return s
 
 RESERVED_WORDS = frozenset("""
@@ -188,7 +186,7 @@ class Namespace(object):
         xkw = dict()
         for k, v in list(kw.items()):
             k = getattr(self, k).args[0]  # convert iname to tagname
-            xkw[self.addns(compatstr(k))] = compatstr(v)
+            xkw[self.addns(k)] = v
         return xkw
 
     def create_element(self, tag, *children, **attrib):
@@ -201,7 +199,7 @@ class Namespace(object):
                 # assert_pure(item)
             if isinstance(item, dict):
                 elem.attrib.update(self.makeattribs(**item))
-            elif isinstance(item, six.string_types):
+            elif isinstance(item, str):
                 # assert_pure(item)
                 #~ if len(elem) and len(elem[-1]) == 0:
                 if len(elem):
@@ -217,7 +215,7 @@ class Namespace(object):
         return elem
 
     def define_names(self, names):
-        if isinstance(names, six.string_types):
+        if isinstance(names, str):
             raise Exception("{} must now call itself split().".format(
                 self))
         for tag in names:

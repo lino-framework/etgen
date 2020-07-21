@@ -1,15 +1,15 @@
-# Copyright 2013-2019 Rumma & Ko Ltd
+# Copyright 2013-2020 Rumma & Ko Ltd
 # License: BSD, see LICENSE for more details.
 
 # This module has no docstring because it is to be execfile'd
 # from `setup.py`, `etgen/__init__.py` and possibly some external
 # tools, too.
 
-install_requires = ['six', 'future', 'lxml', 'atelier', 'django']
+install_requires = ['six', 'future', 'lxml', 'django', 'rstgen']
 
 SETUP_INFO = dict(
     name='etgen',
-    version='1.1.0',
+    version='1.1.1',
     install_requires=install_requires,
     description="Use ElementTree to generate html, rst and other markup",
     license='BSD-2-Clause',
@@ -31,9 +31,8 @@ The central project homepage is http://etgen.lino-framework.org
 """,
     classifiers="""\
 Programming Language :: Python
-Programming Language :: Python :: 2.7
-Programming Language :: Python :: 3.4
-Programming Language :: Python :: 3.5
+Programming Language :: Python :: 3.6
+Programming Language :: Python :: 3.7
 Framework :: Sphinx :: Extension
 Development Status :: 5 - Production/Stable
 Intended Audience :: Developers

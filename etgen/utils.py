@@ -10,7 +10,7 @@ import datetime
 from functools import partial
 from etgen import etree
 from django.utils.functional import Promise
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 
 def join_elems(elems, sep=' '):
@@ -195,7 +195,7 @@ class Namespace(object):
         elem = etree.Element(tag, nsattrib)
         for item in children:
             if isinstance(item, Promise):
-                item = force_text(item)
+                item = force_str(item)
                 # assert_pure(item)
             if isinstance(item, dict):
                 elem.attrib.update(self.makeattribs(**item))

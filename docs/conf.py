@@ -225,6 +225,6 @@ todo_include_todos = True
 gettext_compact = True
 
 
-extlinks.update(ticket=('http://bugs.saffre-rumma.net/tickets/Ticket/%s', '#'))
+# extlinks.update(ticket=('https://jane.mylino.net/#/api/tickets/AllTickets/%s', '#'))
 
 suppress_warnings = ['image.nonlocal_uri']

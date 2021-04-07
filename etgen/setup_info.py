@@ -1,5 +1,5 @@
 # Copyright 2013-2020 Rumma & Ko Ltd
-# License: BSD, see LICENSE for more details.
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 
 # This module has no docstring because it is to be execfile'd
 # from `setup.py`, `etgen/__init__.py` and possibly some external
@@ -16,7 +16,7 @@ SETUP_INFO = dict(
     test_suite='tests',
     author='Luc Saffre',
     author_email='luc@lino-framework.org',
-    url="http://etgen.lino-framework.org",
+    url="https://github.com/lino-framework/etgen",
     long_description="""\
 
 Utilities for generating html, xml and rst content from an
@@ -36,7 +36,7 @@ Programming Language :: Python :: 3.7
 Framework :: Sphinx :: Extension
 Development Status :: 5 - Production/Stable
 Intended Audience :: Developers
-License :: OSI Approved :: BSD License
+License :: OSI Approved :: GNU Affero General Public License v3
 Natural Language :: English
 Operating System :: OS Independent""".splitlines())
 

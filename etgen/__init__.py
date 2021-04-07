@@ -1,5 +1,5 @@
 # Copyright 2011-2018 Rumma & Ko Ltd
-# License: BSD, see LICENSE for more details.
+# License: GNU Affero General Public License v3 (see file COPYING for details)
 """
 This is the :mod:`etgen` package.
 

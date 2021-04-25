@@ -1,6 +1,6 @@
 """
 Based on Amaury's adaption of Eli Golovinsky's post
-http://stackoverflow.com/questions/174890/how-to-output-cdata-using-elementtree
+https://stackoverflow.com/questions/174890/how-to-output-cdata-using-elementtree
 
 Gooli's original snippet didn't work in Python 2.7
 

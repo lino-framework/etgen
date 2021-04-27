@@ -14,8 +14,8 @@ SETUP_INFO = dict(
     description="Use ElementTree to generate html, rst and other markup",
     license='BSD-2-Clause',
     test_suite='tests',
-    author='Luc Saffre',
-    author_email='luc@lino-framework.org',
+    author='Rumma & Ko Ltd',
+    author_email='info@lino-framework.org',
     url="https://github.com/lino-framework/etgen",
     long_description="""\
 

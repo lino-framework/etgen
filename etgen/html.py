@@ -85,7 +85,7 @@ lxml generates self-closing tags for elements without children:
 >>> print(tostring(E.div()))
 <div/>
 
-Some environments refuse empty ``div>`` elements and interpret a ``<div/>`` as
+Some environments refuse empty ``<div>`` elements and interpret a ``<div/>`` as
 ``<div>`` (don't ask me why).  You can avoid the self-closing tag by setting
 the ``text`` attribute to an empty string:
 

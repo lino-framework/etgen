@@ -4,6 +4,11 @@
 Changes in `etgen`
 =======================
 
+2021-09-02
+==========
+
+Move :func:`validate_pain001` and its XSD files to :mod:`lino_xl.lib.finan`.
+
 2020-05-04
 ==========
 

@@ -12,7 +12,7 @@ Released version 1.1.2
 2021-12-16
 ==========
 
-Fix :ticket:`4401` cannot import name 'escape' from 'cgi'
+Fix `#4401 <https://jane.mylino.net/#/api/tickets/Tickets/4401>`__ (cannot import name 'escape' from 'cgi')
 
 2021-09-02
 ==========

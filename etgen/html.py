@@ -18,7 +18,7 @@ import types
 from xml.etree import ElementTree as ET
 # from lxml.etree import HTML
 from lxml import etree
-from lxml.etree import iselement
+from lxml.etree import iselement, fromstring
 from etgen.utils import join_elems, forcetext
 # from etgen.utils import Namespace
 from etgen.html2rst import html2rst, UnsupportedHtmlTag

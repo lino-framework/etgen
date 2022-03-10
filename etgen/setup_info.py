@@ -1,4 +1,5 @@
-# Copyright 2013-2020 Rumma & Ko Ltd
+# -*- coding: UTF-8 -*-
+# Copyright 2013-2022 Rumma & Ko Ltd
 # License: GNU Affero General Public License v3 (see file COPYING for details)
 
 # This module has no docstring because it is to be execfile'd
@@ -9,7 +10,7 @@ install_requires = ['six', 'future', 'lxml', 'django', 'rstgen']
 
 SETUP_INFO = dict(
     name='etgen',
-    version='1.1.2',
+    version='1.1.3',
     install_requires=install_requires,
     description="Use ElementTree to generate html, rst and other markup",
     license='BSD-2-Clause',

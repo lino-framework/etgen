@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 extensions = []
-from atelier.sphinxconf import configure
+from rstgen.sphinxconf import configure
 configure(globals())
 
-extensions += ['atelier.sphinxconf.complex_tables']
+extensions += ['rstgen.sphinxconf.complex_tables']
 extensions += ['sphinx.ext.autosummary']
 
 import etgen

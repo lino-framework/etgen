@@ -185,8 +185,8 @@ htmlhelp_basename = 'etgen'
 
 
 extlinks = {
-    'djangoticket': ('http://code.djangoproject.com/ticket/%s', 'Django ticket #'),
-    'srcref': (etgen.srcref_url, ''),
+    # 'djangoticket': ('http://code.djangoproject.com/ticket/%s', 'Django ticket #%s'),
+    'srcref': (etgen.srcref_url, None),
 }
 
 autosummary_generate = True

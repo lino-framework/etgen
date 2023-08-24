@@ -30,16 +30,16 @@ if __name__ == '__main__':
     if len(sys.argv) < 3:
         #~ raise Exception("Usage: python -m %s name of the file to be validated" % __name__)
         #~ raise Exception("Missing command-line argument: the name of the file to be validated.")
-        print USAGE
+        print(USAGE)
         sys.exit(-1)
     nsname = sys.argv[1]
     fn = sys.argv[2]
 
     ns = getattr(intervat, nsname, None)
     if ns is None:
-        print "Invalid type %r" % nsname
+        print("Invalid type %r" % nsname)
         sys.exit(-1)
 
     doc = etree.parse(fn)
     ns.validate_doc(doc)
-    print fn, "is a valid %s" % ns.__class__.__name__
+    print(fn, "is a valid %s" % ns.__class__.__name__)

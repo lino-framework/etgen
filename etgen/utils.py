@@ -74,7 +74,7 @@ def compatstr(s):
     introduces a special helper class `newstr` which simulates, under
     Python 2, the behaviour of Python 3 strings.  But
     `xml.etree.ElementTree
-    <https://docs.python.org/2/library/xml.etree.elementtree.html>`__
+    <https://docs.python.org/3/library/xml.etree.elementtree.html>`__
     in Python 2 doesn't know about `python-future` and produces
     invalid XML when you feed it with such a string.
 
@@ -251,7 +251,7 @@ class Namespace(object):
         This just forwards to the
         :meth:`xml.etree.ElementTree.fromstring` library function.
         See the `Parsing XML
-        <https://docs.python.org/2.7/library/xml.etree.elementtree.html#parsing-xml>`__
+        <https://docs.python.org/3/library/xml.etree.elementtree.html#parsing-xml>`__
         section of the Python docs.
 
         """

@@ -23,22 +23,25 @@ if hasattr(etree, '_serialize_xml'):
 
     def _serialize_xml(write, elem, *args, **kwargs):
         if elem.tag == '![CDATA[':
-            write("\n<%s%s]]>\n" % (
-                elem.tag, elem.text))
+            write("\n<%s%s]]>\n" % (elem.tag, elem.text))
             return
         return _original_serialize_xml(write, elem, *args, **kwargs)
+
     etree._serialize_xml = etree._serialize['xml'] = _serialize_xml
 
     register_namespace = etree.register_namespace
 
 else:
+
     def register_namespace(*args, **kw):
         pass
+
 
 from xml.etree.ElementTree import *
 
 if six.PY3:
     _tostring = tostring
+
     # # change default value for encoding to 'unicode'
     # def tostring(element, encoding="us-ascii", *args, **kwargs):
     #     return _tostring(element, encoding, *args, **kwargs)

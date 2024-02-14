@@ -30,6 +30,7 @@ def join_elems(elems, sep=' '):
 
         def sep():
             return sep_value
+
     l = []
     s = None
     for e in elems:
@@ -38,6 +39,7 @@ def join_elems(elems, sep=' '):
         s = sep()
         l.append(e)
     return l
+
 
 def forcetext(iter):
     """
@@ -49,6 +51,7 @@ def forcetext(iter):
             yield str(i)
         else:
             yield i
+
 
 def pretty_print(elem):
     """
@@ -88,6 +91,7 @@ def compatstr(s):
     #     return six.text_type(s)
     return s
 
+
 RESERVED_WORDS = frozenset("""
 and       del       from      not       while
 as        elif      global    or        with
@@ -101,9 +105,12 @@ def       for       lambda    try
 TYPEMAP = {
     #~ datetime.datetime: py2str,
     #~ IncompleteDate : lambda e,v : str(v),
-    datetime.datetime: lambda e, v: v.strftime("%Y%m%dT%H%M%S"),
-    datetime.date: lambda e, v: v.strftime("%Y-%m-%d"),
-    int: lambda e, v: str(v),
+    datetime.datetime:
+    lambda e, v: v.strftime("%Y%m%dT%H%M%S"),
+    datetime.date:
+    lambda e, v: v.strftime("%Y-%m-%d"),
+    int:
+    lambda e, v: str(v),
 }
 
 
@@ -118,7 +125,7 @@ class Namespace(object):
 
     def __init__(self, targetNamespace=None, names=None, prefix=None):
         #~ if prefix is not None:
-            #~ self.prefix = prefix
+        #~ self.prefix = prefix
         #~ kw.setdefault('typemap',TYPEMAP)
         #~ kw.setdefault('makeelement',self.makeelement)
         #~ nsmap = kw.setdefault('nsmap',{})
@@ -138,10 +145,10 @@ class Namespace(object):
             #~ if prefix:
             #~ nsmap[prefix] = self.targetNamespace
         #~ if used_namespaces is not None:
-            #~ self.used_namespaces = used_namespaces
+        #~ self.used_namespaces = used_namespaces
         #~ if self.used_namespaces is not None:
-            #~ for ns in self.used_namespaces:
-                #~ nsmap[ns.prefix] = ns.targetNamespace
+        #~ for ns in self.used_namespaces:
+        #~ nsmap[ns.prefix] = ns.targetNamespace
         #~ self._element_maker = ElementMaker(**kw)
         #~ self._source_elements = {}
         if self.names is not None:
@@ -155,8 +162,10 @@ class Namespace(object):
         pass
 
     def tostring(self, element, *args, **kw):
+
         class dummy(object):
             pass
+
         data = []
         file = dummy()
         file.write = data.append
@@ -216,8 +225,7 @@ class Namespace(object):
 
     def define_names(self, names):
         if isinstance(names, str):
-            raise Exception("{} must now call itself split().".format(
-                self))
+            raise Exception("{} must now call itself split().".format(self))
         for tag in names:
             iname = tag.replace("-", "_")
             iname = iname.replace(".", "_")
@@ -230,7 +238,7 @@ class Namespace(object):
 
     def getnsattr(self, elem, name):
         #~ if self.targetNamespace is None or name.startswith('{'):
-            #~ return elem.get(name)
+        #~ return elem.get(name)
         return elem.get(self._element_maker._namespace + name)
 
     #~ def update_attribs(self,root,**kw):
@@ -261,12 +269,14 @@ class Namespace(object):
         """Parses the given string into an XML Element."""
         return RAW(*args)
 
+
 RAW = etree.XML
 
 
 def _test():
     import doctest
     doctest.testmod()
+
 
 if __name__ == "__main__":
     _test()

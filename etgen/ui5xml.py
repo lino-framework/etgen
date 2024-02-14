@@ -1,8 +1,8 @@
 from etgen.html import HtmlNamespace
 
-
-
-E = HtmlNamespace(None, set("""
+E = HtmlNamespace(
+    None,
+    set("""
 ObjectListItem
 SideNavigation
 item

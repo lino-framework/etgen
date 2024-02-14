@@ -33,6 +33,7 @@ def CDATA(text=None):
     element.text = text
     return element
 
+
 # We're replacing the _write method of the ElementTree class so that it would
 # recognize and correctly print out CDATA sections.
 old_ElementTree = etree.ElementTree
@@ -47,6 +48,8 @@ class ElementTree_CDATA(old_ElementTree):
                 file.write("<![CDATA[%s]]>" % text)
         else:
             old_ElementTree._write(self, file, node, encoding, namespaces)
+
+
 etree.ElementTree = ElementTree_CDATA
 
 # Since xml.parsers.expat supports parsing CDATA sections, all we need to do
@@ -92,6 +95,7 @@ class XMLTreeBuilder_CDATA(old_XMLTreeBuilder):
         else:
             old_XMLTreeBuilder._data(self, text)
 
+
 etree.XMLTreeBuilder = XMLTreeBuilder_CDATA
 etree.XMLParser = XMLTreeBuilder_CDATA  # added by LS
 register_namespace = etree.register_namespace  # added by LS
@@ -104,7 +108,6 @@ except ImportError:
     # http://effbot.org/zone/element-index.htm
     from elementtree.ElementTree import *
 
-
 # ------------------------------------------------------------------------
 
 if __name__ == "__main__":
@@ -116,7 +119,7 @@ if __name__ == "__main__":
     print(xml)
 
     # The parsed and regenerated XML is the same as the sample XML string
-    assert(sampleXml == xml)
+    assert (sampleXml == xml)
 
     # Generate a tree with a CDATA section
     root = Element("data")
@@ -128,4 +131,4 @@ if __name__ == "__main__":
     print(xml2)
 
     # The generated XML is the same as the sample XML string
-    assert(sampleXml == xml2)
+    assert (sampleXml == xml2)

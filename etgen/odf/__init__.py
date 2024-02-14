@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2012-2018 Rumma & Ko Ltd
 # License: GNU Affero General Public License v3 (see file COPYING for details)
-
 u"""
 Tools for generating `Open Document 
 <http://lists.oasis-open.org/archives/tc-announce/201201/msg00001.html>`_ 
@@ -168,13 +167,13 @@ File xmlgen_odf_2.odt has been created.
 
 """
 
-
 import os
 
 
 def rngpath(*parts):
     p1 = os.path.abspath(os.path.dirname(__file__))
     return os.path.join(p1, 'relaxng', *parts)
+
 
 try:
     from lxml import etree
@@ -184,8 +183,6 @@ except ImportError:
     from etgen import etree
 
 from etgen.utils import Namespace
-
-
 """    
 <grammar xmlns="http://relaxng.org/ns/structure/1.0" xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:db="urn:oasis:names:tc:opendocument:xmlns:database:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:smil="urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
 """
@@ -197,6 +194,7 @@ class Text(Namespace):
         self.define_names("""
         p style-name
         """.split())
+
 
 text = Text('text', prefix="urn:oasis:names:tc:opendocument:xmlns:text:1.0")
 #~ text = Namespace('text',"urn:oasis:names:tc:opendocument:xmlns:text:1.0")
@@ -218,7 +216,10 @@ class Table(Namespace):
         table-column
         table-column-group
         """.split())
-table = Table('table', prefix="urn:oasis:names:tc:opendocument:xmlns:table:1.0")
+
+
+table = Table('table',
+              prefix="urn:oasis:names:tc:opendocument:xmlns:table:1.0")
 
 
 class Style(Namespace):
@@ -237,7 +238,10 @@ class Style(Namespace):
         table-row-properties
         column-width
         """.split())
-style = Style('style', prefix="urn:oasis:names:tc:opendocument:xmlns:style:1.0")
+
+
+style = Style('style',
+              prefix="urn:oasis:names:tc:opendocument:xmlns:style:1.0")
 
 
 class FO(Namespace):
@@ -252,7 +256,10 @@ class FO(Namespace):
         font-weight
         background-color
         """.split())
-fo = FO('fo', prefix="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0")
+
+
+fo = FO('fo',
+        prefix="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0")
 
 
 class Office(Namespace):
@@ -265,10 +272,11 @@ class Office(Namespace):
         value-type
         """.split())
 
-office = Office('office', prefix="urn:oasis:names:tc:opendocument:xmlns:office:1.0")
+
+office = Office('office',
+                prefix="urn:oasis:names:tc:opendocument:xmlns:office:1.0")
 
 table.value_type = office.value_type
-
 
 if False:
     for prefix, url in rng_tree.getroot().nsmap.items():
@@ -280,16 +288,14 @@ if False:
 def validate(root):
     validator.assertValid(root)
     #~ if not validator.validate(root):
-        #~ raise xg.Warning(validator.error_log.last_error)
+    #~ raise xg.Warning(validator.error_log.last_error)
 
 
 def validate_chunks(*chunks):
     root = office.document(
-        office.makeattribs(
-            version="1.2",
-            mimetype="application/vnd.oasis.opendocument.text"),
-        office.body(
-            office.text(*chunks)),
+        office.makeattribs(version="1.2",
+                           mimetype="application/vnd.oasis.opendocument.text"),
+        office.body(office.text(*chunks)),
     )
     validate(root)
 
@@ -313,8 +319,8 @@ def render_to_odt(target_file, startfile=False, **context):
 
 
 #~ class OpenDocument(Namespace):
-    #~ rng_filename = rngpath('OpenDocument-v1.2-os-schema.rng')
-    #~ used_namespaces = [ iic ]
+#~ rng_filename = rngpath('OpenDocument-v1.2-os-schema.rng')
+#~ used_namespaces = [ iic ]
 #~ odf = OpenDocument()
 
 
@@ -360,13 +366,16 @@ def unused_table2odt(headers, fields, widths, rows):
             has_sum = True
             break
     if has_sum:
-        yield html.TR(
-            *[html.TD(x, **cellattrs) for x in ar.ah.store.sums2html(ar, fields, sums)])
+        yield html.TR(*[
+            html.TD(x, **cellattrs)
+            for x in ar.ah.store.sums2html(ar, fields, sums)
+        ])
 
 
 def _test():
     import doctest
     doctest.testmod()
+
 
 if __name__ == "__main__":
     _test()

@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Copyright 2013-2020 Rumma & Ko Ltd
 # License: GNU Affero General Public License v3 (see file COPYING for details)
-
 """
 Convert an :mod:`etgen.html` element to a reStructuredText string.
 
@@ -69,10 +68,13 @@ import rstgen
 from etgen import etree
 
 NEWLINE_TAGS = set(['p', 'thead', 'tr', 'li'])
-IGNORED_TAGS = set(['tbody', 'table', 'div', 'span', 'br', 'ul', 'ol', 'html', 'body'])
+IGNORED_TAGS = set(
+    ['tbody', 'table', 'div', 'span', 'br', 'ul', 'ol', 'html', 'body'])
+
 
 class UnsupportedHtmlTag(Exception):
     pass
+
 
 def html2rst(e, stripped=False):
     """
@@ -144,7 +146,6 @@ def html2rst(e, stripped=False):
 
 
 class RstTable(rstgen.Table):
-
     """
     A table containing elementtree HTML:
 

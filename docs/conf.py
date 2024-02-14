@@ -2,6 +2,7 @@
 
 extensions = []
 from rstgen.sphinxconf import configure
+
 configure(globals())
 
 extensions += ['rstgen.sphinxconf.complex_tables']
@@ -47,8 +48,8 @@ version = '.'.join(release.split('.')[:2])
 # List of directories, relative to source directory, that shouldn't be searched
 # for source files.
 exclude_trees = [
-  'include',
-  ]
+    'include',
+]
 
 # The reST default role (used for this markup: `text`) to use for all documents.
 #default_role = None
@@ -66,7 +67,6 @@ exclude_trees = [
 
 # The name of the Pygments (syntax highlighting) style to use.
 # pygments_style = 'sphinx'
-
 
 # Options for HTML output
 # -----------------------
@@ -109,15 +109,14 @@ html_last_updated_fmt = '%b %d, %Y'
 
 # Custom sidebar templates, maps document names to template names.
 html_sidebars = {
-   '**': ['globaltoc.html', 'searchbox.html', 'links.html'],
+    '**': ['globaltoc.html', 'searchbox.html', 'links.html'],
 }
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
 #~ html_additional_pages = {
-    #~ '*': 'links.html',
+#~ '*': 'links.html',
 #~ }
-
 
 # If false, no module index is generated.
 html_use_modindex = True
@@ -143,7 +142,6 @@ html_use_opensearch = 'http://lino.saffre-rumma.net'
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'etgen'
 
-
 # Options for LaTeX output
 # ------------------------
 
@@ -156,7 +154,7 @@ htmlhelp_basename = 'etgen'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
 #~ latex_documents = [
-  #~ ('index', 'lino.tex', ur'lino', ur'Luc Saffre', 'manual'),
+#~ ('index', 'lino.tex', ur'lino', ur'Luc Saffre', 'manual'),
 #~ ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -183,7 +181,6 @@ htmlhelp_basename = 'etgen'
 #~ srcref_base_uri="http://code.google.com/lino"
 #~ srcref_base_uri="http://code.google.com/p/lino/source/browse/#hg"
 
-
 extlinks = {
     # 'djangoticket': ('http://code.djangoproject.com/ticket/%s', 'Django ticket #%s'),
     'srcref': (etgen.srcref_url, None),
@@ -201,7 +198,7 @@ autosummary_generate = True
 #     "font_family": my_font_family,
 #     "head_font_family": my_font_family,
 # }
-    # font_family: "'goudy old style', 'minion pro', 'bell mt', Georgia, 'Hiragino Mincho Pro', serif")
+# font_family: "'goudy old style', 'minion pro', 'bell mt', Georgia, 'Hiragino Mincho Pro', serif")
 
 # html_theme = "default"
 # html_theme_options = dict(
@@ -212,7 +209,6 @@ todo_include_todos = True
 
 #~ New in version 1.1
 gettext_compact = True
-
 
 # extlinks.update(ticket=('https://jane.mylino.net/#/api/tickets/AllTickets/%s', '#'))
 

@@ -39,12 +39,14 @@ License :: OSI Approved :: GNU Affero General Public License v3
 Natural Language :: English
 Operating System :: OS Independent""".splitlines())
 
-SETUP_INFO.update(packages=[n for n in """
+SETUP_INFO.update(packages=[
+    n for n in """
 etgen
 etgen.intervat
 etgen.odf
 etgen.sepa
-""".splitlines() if n])
+""".splitlines() if n
+])
 
 SETUP_INFO.update(package_data=dict(), include_package_data=True)
 

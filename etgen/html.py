@@ -7,7 +7,6 @@
 # Modifications in this file are
 # Copyright (c) 2012-2019 Rumma & Ko Ltd
 # --------------------------------------------------------------------
-
 """See :doc:`/usage`.
 
 """
@@ -26,7 +25,6 @@ from etgen.html2rst import html2rst, UnsupportedHtmlTag
 
 # ENTITIES = {}
 # ENTITIES.update((x, unichr(i)) for x, i in name2codepoint.iteritems())
-
 
 # def CreateParser():
 #     """Every string that is being parsed must get its own parser instance.
@@ -49,13 +47,15 @@ from etgen.html2rst import html2rst, UnsupportedHtmlTag
 #     pass
 
 
-def CLASS(*args): # class is a reserved word in Python
+def CLASS(*args):  # class is a reserved word in Python
     return {"class": ' '.join(args)}
+
 
 # class HtmlNamespace(Namespace):
 #     """The HTML namespace.
 #     This is instantiated as ``E``.
 #     """
+
 
 def tostring(v, *args, **kw):
     # if isinstance(v, types.GeneratorType):
@@ -66,6 +66,7 @@ def tostring(v, *args, **kw):
         kw.setdefault('encoding', 'unicode')
         return etree.tostring(v, *args, **kw)
     return str(v)
+
 
 def tostring_pretty(*args, **kw):
     kw.setdefault('pretty_print', True)
@@ -84,14 +85,18 @@ def to_rst(v, stripped=True):
         v2 = etree.fromstring(v)
         if not iselement(v2):
             raise Exception(
-                "fromstring({!r}) returned {} (expected element)".format(v, v2))
+                "fromstring({!r}) returned {} (expected element)".format(
+                    v, v2))
         v = v2
     if iselement(v):
         try:
             return html2rst(v, stripped)
         except UnsupportedHtmlTag as e:
-            raise Exception("{} while converting {} to reSTructuredText".format(e, tostring(v)))
+            raise Exception(
+                "{} while converting {} to reSTructuredText".format(
+                    e, tostring(v)))
     return str(v)
+
 
 #     # def raw(self, raw_html):
 #     #     return RAW_HTML_STRING(raw_html)
@@ -253,6 +258,7 @@ class Table(object):
     ``<foot>`` and ``<body>``.
 
     """
+
     def __init__(self):
         self.clear()
 
@@ -322,10 +328,7 @@ class Document(object):
             headers.append(E.link(rel="stylesheet", type="text/css", href=css))
         headers.append(E.title(self.title))
 
-        return E.html(
-            E.head(*headers),
-            E.body(*body)
-        )
+        return E.html(E.head(*headers), E.body(*body))
 
 
 def lines2p(lines, min_height=0, sep=E.br, **attrs):

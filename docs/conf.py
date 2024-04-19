@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+# yapf: disable
+
+import datetime
 
 extensions = []
-from rstgen.sphinxconf import configure
 
-configure(globals())
+from rstgen.sphinxconf import configure ; configure(globals())
 
 extensions += ['rstgen.sphinxconf.complex_tables']
 extensions += ['sphinx.ext.autosummary']
@@ -15,7 +17,7 @@ import etgen
 
 # General information about the project.
 project = "etgen"
-copyright = '2002-2021 Rumma & Ko Ltd'
+copyright = '2002-{} Rumma & Ko Ltd'.format(datetime.date.today().year)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -212,4 +214,4 @@ gettext_compact = True
 
 # extlinks.update(ticket=('https://jane.mylino.net/#/api/tickets/AllTickets/%s', '#'))
 
-suppress_warnings = ['image.nonlocal_uri']
+# suppress_warnings += ['image.nonlocal_uri']

@@ -15,6 +15,9 @@ class PackagesTests(TestCase):
 
 class UtilsTests(TestCase):
 
+    # def test_init(self):
+    #     self.run_simple_doctests(SRC + '__init__.py')
+
     def test_utils(self):
         self.run_simple_doctests(SRC + 'utils.py')
 

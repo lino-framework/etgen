@@ -5,13 +5,11 @@
 # The ElementTree toolkit is
 # Copyright (c) 1999-2004 by Fredrik Lundh
 # Modifications in this file are
-# Copyright (c) 2012-2019 Rumma & Ko Ltd
+# Copyright (c) 2012-2024 Rumma & Ko Ltd
 # --------------------------------------------------------------------
 """See :doc:`/usage`.
 
 """
-
-from builtins import object
 
 import types
 from xml.etree import ElementTree as ET
@@ -75,12 +73,25 @@ def tostring_pretty(*args, **kw):
 
 
 def to_rst(v, stripped=True):
-    """Render the given value as an rst formatted string."""
+    """
+
+    Render the given text `v` as a reSTructuredText formatted string using
+    :func:`etgen.html2rst`.
+
+    If v`` is an ElementTree element, parse it first using
+    :func:`lxml.etree.fromstring`.
+
+    If `v` is a generator, iterate over it recursively.
+
+    """
     if isinstance(v, types.GeneratorType):
         return "".join([to_rst(x, stripped) for x in v])
     # 20200501 new rule : if v is a str, then it is supposed to be raw html
     if isinstance(v, str):
+        # if isinstance(v, SafeString):
         if not v:
+            return v
+        if not v.startswith("<"):
             return v
         v2 = etree.fromstring(v)
         if not iselement(v2):
@@ -253,7 +264,7 @@ def table_body_row(*cells, **kw):
     return E.tr(*[E.td(h, **kw) for h in cells])
 
 
-class Table(object):
+class Table:
     """A pythonic representation of a ``<table>`` with ``<head>``,
     ``<foot>`` and ``<body>``.
 
@@ -294,7 +305,7 @@ class Table(object):
         return E.table(*children, **self.attrib)
 
 
-class Document(object):
+class Document:
     """A pythonic representation of a ``<body>`` with a ``<title>`` and
     some ``<head>`` tags for stylesheets.
 

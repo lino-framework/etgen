@@ -23,18 +23,18 @@ Inspired by Frederik Lundh's
 
 >>> bob = E.bar_o_baz()
 >>> baz = E.add_child(bob, 'baz', class_='first')
->>> print tostring(baz)
+>>> print(tostring(baz))
 <baz xmlns="http://my.ns" class="first" />
 
 >>> bob = E.bar_o_baz('Hello', class_='first', foo_bar="3")
->>> print tostring(bob)
+>>> print(tostring(bob))
 <bar-o-baz xmlns="http://my.ns" class="first" foo-bar="3">Hello</bar-o-baz>
 
 The following reproduces a pifall. Here is the initial code:
 
 >>> E = Namespace(None, "div br".split())
 >>> bob = E.div("a", E.br(), "b", E. br(), "c", E.br(), "d")
->>> print tostring(bob)
+>>> print(tostring(bob))
 <div>a<br />b<br />c<br />d</div>
 
 The idea is to use :func:`join_elems` to insert the <br> tags:
@@ -44,7 +44,7 @@ The idea is to use :func:`join_elems` to insert the <br> tags:
 But surprise:
 
 >>> elems = join_elems(["a", "b", "c", "d"], sep=E.br())
->>> print tostring(E.div(*elems))
+>>> print(tostring(E.div(*elems)))
 <div>a<br />bcd<br />bcd<br />bcd</div>
 
 What happened here is that the same `<br>` element instance was being
@@ -53,7 +53,7 @@ without the parentheses so that `join_elems` instantiates each time a
 new element:
 
 >>> elems = join_elems(["a", "b", "c", "d"], sep=E.br)
->>> print tostring(E.div(*elems))
+>>> print(tostring(E.div(*elems)))
 <div>a<br />b<br />c<br />d</div>
 
 

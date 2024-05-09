@@ -26,7 +26,8 @@ A collection of utilities for generating html, xml and rst content from an
 Inspired by Fredrik Lundh's `ElementTree Builder
 <http://effbot.org/zone/element-builder.htm>`_.
 
-The central project homepage is https://etgen.lino-framework.org
+- Code repository: https://github.com/lino-framework/etgen
+- Documentation: https://etgen.lino-framework.org
 
 """,
     classifiers="""\

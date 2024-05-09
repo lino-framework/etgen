@@ -56,6 +56,16 @@ def CLASS(*args):  # class is a reserved word in Python
 
 
 def tostring(v, *args, **kw):
+    """
+    Call :func:`lxml.etree.tostring` with the following additional rules:
+
+    If the value is a generator, convert each item individually and concatenate
+    their HTML.
+
+    If the value is not an ElementTree element , just convert it into a
+    :class:`str`.
+
+    """
     # if isinstance(v, types.GeneratorType):
     if isinstance(v, (types.GeneratorType, list, tuple)):
         return "".join([tostring(x, *args, **kw) for x in v])
@@ -93,7 +103,7 @@ def to_rst(v, stripped=True):
             return v
         if not v.startswith("<"):
             return v
-        v2 = etree.fromstring(v)
+        v2 = fromstring(v)
         if not iselement(v2):
             raise Exception(
                 "fromstring({!r}) returned {} (expected element)".format(

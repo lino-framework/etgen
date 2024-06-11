@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# yapf: disable
+# fmt: off
 
 import datetime
 

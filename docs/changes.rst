@@ -41,7 +41,7 @@ like normal element tree elements.
 2019-10-14
 ==========
 
-html2rst now digests ``html`` and ``body`` elemtns and provides clearer
+html2rst now digests ``html`` and ``body`` elements and provides clearer
 error messages for unsupported elements
 
 Released version 1.0.0

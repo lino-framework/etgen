@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = 'etgen'
+dynamic = ["version"]
+description = "Use ElementTree to generate html, rst and other markup"
+requires-python = ">= 3.8"
+dependencies = ['six', 'future', 'lxml', 'django', 'rstgen']
+
+# scripts=['synodal.py']
+readme = "README.rst"
+# py_modules = ['synodal']
+
+license = {file = "COPYING"}
+authors = [
+  {name='Rumma & Ko Ltd', email="info@saffre-rumma.net"},
+  {name='Luc Saffre', email="luc@saffre-rumma.net"},
+]
+
+classifiers= [
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: GNU Affero General Public License v3',
+    'Operating System :: OS Independent'
+]
+
+[project.urls]
+
+Homepage = "https://www.lino-framework.org"
+Repository = "https://github.com/lino-framework/etgen"
+
+[project.optional-dependencies]
+
+dev = ["hatch"]
+
+[tool.hatch.version]
+path = "etgen/__init__.py"

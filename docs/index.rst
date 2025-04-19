@@ -4,12 +4,6 @@
 etgen
 =======
 
-.. py2rst::
-
-  import etgen
-  print(etgen.SETUP_INFO['long_description'])
-
-
 
 Installation
 ------------
@@ -30,4 +24,3 @@ Sitemap
    api/index
    changes
    thanks
-

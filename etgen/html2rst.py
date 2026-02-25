@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# Copyright 2013-2020 Rumma & Ko Ltd
+# Copyright 2013-2026 Rumma & Ko Ltd
 # License: GNU Affero General Public License v3 (see file COPYING for details)
 """
 Convert an :mod:`etgen.html` element to a reStructuredText string.
@@ -67,7 +67,7 @@ import rstgen
 
 from etgen import etree
 
-NEWLINE_TAGS = set(['p', 'thead', 'tr', 'li'])
+NEWLINE_TAGS = set(['p', 'thead', 'tr', 'li', 'pre'])
 IGNORED_TAGS = set(
     ['tbody', 'table', 'div', 'span', 'br', 'ul', 'ol', 'html', 'body'])
 
@@ -80,9 +80,9 @@ def html2rst(e, stripped=False):
     """
     Convert an element tree to reStructuredText.
     """
-    #~ print("20120613 html2odftext()", e.tag, e.text)
+    # ~ print("20120613 html2odftext()", e.tag, e.text)
     rst = ''
-    if e.tag in ('p', 'li'):
+    if e.tag in ('p', 'li', 'pre'):
         if not stripped:
             rst += '\n\n'
 

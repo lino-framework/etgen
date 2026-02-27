@@ -24,7 +24,7 @@ Inspired by Frederik Lundh's
 
 # from .setup_info import SETUP_INFO
 
-__version__ = '1.1.4'
+__version__ = '1.1.5'
 
 intersphinx_urls = dict(docs="https://etgen.lino-framework.org")
 srcref_url = 'https://github.com/lino-framework/etgen/blob/master/%s'

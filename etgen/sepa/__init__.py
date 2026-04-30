@@ -40,7 +40,6 @@ logger = logging.getLogger(__name__)
 
 import os
 import sys
-import cgi
 import datetime
 
 from xml.etree import ElementTree as ET

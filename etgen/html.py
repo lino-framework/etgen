@@ -103,7 +103,10 @@ def to_rst(v, stripped=True):
             return v
         if not v.startswith("<"):
             return v
-        v2 = fromstring(v)
+        try:
+            v2 = fromstring(v)
+        except Exception as e:
+            v2 = e
         if not iselement(v2):
             raise Exception(
                 "fromstring({!r}) returned {} (expected element)".format(
